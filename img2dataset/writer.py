@@ -203,7 +203,9 @@ class TFRecordSampleWriter:
 
     def _feature(self, value):
         """Convert to proper feature type"""
-        if isinstance(value, int):
+        if isinstance(value, list):
+            return self._list_feature(value)
+        elif isinstance(value, int):
             return self._int64_feature(value)
         elif isinstance(value, float):
             return self._float_feature(value)
@@ -225,6 +227,19 @@ class TFRecordSampleWriter:
     def _int64_feature(self, value):
         """Returns an int64_list from a bool / enum / int / uint."""
         return self._Feature(int64_list=self._Int64List(value=[value]))
+
+    def _list_feature(self, value):
+        if isinstance(value[0], int):
+            """Returns an int64_list from a bool / enum / int / uint."""
+            return self._Feature(int64_list=self._Int64List(value=value))
+        elif isinstance(value[0], float):
+            """Returns a float_list from a float / double."""
+            return self._Feature(float_list=self._FloatList(value=value))
+        else:
+            raise NotImplemented(
+                "list feature can only have int64 or floats"
+            )            
+
 
 
 class FilesSampleWriter:
