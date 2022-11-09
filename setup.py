@@ -25,7 +25,7 @@ if __name__ == "__main__":
         entry_points={"console_scripts": ["img2dataset = img2dataset:main"]},
         author="Romain Beaumont",
         author_email="romain.rom1@gmail.com",
-        url="https://github.com/rom1504/img2dataset",
+        url="https://github.com/justhungryman/img2dataset",
         data_files=[(".", ["README.md"])],
         keywords=["machine learning", "computer vision", "download", "image", "dataset"],
         install_requires=REQUIREMENTS,
